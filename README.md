@@ -1,3 +1,5 @@
+Cloned from: https://github.com/trussworks/terraform-aws-ses-domain.git
+
 Configures a domain hosted on Route53 to work with AWS Simple Email Service (SES).
 
 ## Prerequisites
@@ -21,17 +23,6 @@ Creates the following resources:
 * Custom MAIL FROM domain
 * CNAME records for DKIM verification
 * SES Verfication for the domain
-
-### NOTES
-
-* SES is only available in us-east-1, us-west-2, and eu-west-1
-* SES out of the box locks the service in development mode; please see this documentation on how to make it production ready. Until the service is in production mode you can only send emails to confirmed email accounts denoted in `from_addresses`
-
-## Terraform Versions
-
-Terraform 0.12. Pin module version to ~> 2.X. Submit pull-requests to master branch.
-
-Terraform 0.11. Pin module version to ~> 1.0.2. Submit pull-requests to terraform011 branch.
 
 ## Usage
 
@@ -96,27 +87,3 @@ data "aws_route53_zone" "SES_domain" {
 | ses\_identity\_arn | SES identity ARN. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
-## Developer Setup
-
-Install dependencies (macOS)
-
-```shell
-brew install pre-commit go terraform terraform-docs
-```
-
-### Testing
-
-[Terratest](https://github.com/gruntwork-io/terratest) is being used for
-automated testing with this module. Tests in the `test` folder can be run
-locally by running the following command:
-
-```shell
-make test
-```
-
-Or with aws-vault:
-
-```shell
-AWS_VAULT_KEYCHAIN_NAME=<NAME> aws-vault exec <PROFILE> -- make test
-```
